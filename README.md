@@ -6,6 +6,16 @@ The configuration must be stored in `/etc/dnscrypt-proxy`. The rest of files (li
 
 > **Note**: The proxy will always run as unprivileged user. In your configuration, you should use a port higher than `1024` (like `5353`) and then, you can expose the port as `53` or whatever other you want. This is done for you by default when the config volume is empty.
 
+## Tags
+
+In [Docker Hub](https://hub.docker.com/r/melchor9000/dnscrypt-proxy/), you can find these tags for `melchor9000/dnscrypt-proxy`:
+
+ - `latest`: x86_64/amd64
+ - `arm`: armhf (armv7)
+ - `arm64`: aarch64 (armv8 64-bit)
+
+All images are based on [alpine](https://hub.docker.com/_/alpine/) image to have low size images.
+
 ## The first run
 
 The configuration files are written to the volume when you run for the first time the `dnscrypt-proxy` (only this one). My recomendation is to run the container for the first time, to let the configuration be written to the volume, and then stop it. Now, you can modify everything you want easily.
@@ -25,6 +35,9 @@ This initial configuration is good enough to start doing things. But, for a prod
  7. The blacklist, ip-blacklist and whitelist are enabled too, you can add some block (or allow) rules in these files. The blacklist has some defined values, look them
  8. Could be a good idea to check the `cache` options
 
+## Environment variables
+
+The only one environment variable that can be configured is `CONFIG_PATH`. By default is `/etc/dnscrypt-proxy`, but if you want to change that, you can. This variable is to tell the init script where is the configuration folder inside the container. It is not recommended to change that, as the default value is valid, but you can change that if you need to.
 
 ## Example: docker
 
