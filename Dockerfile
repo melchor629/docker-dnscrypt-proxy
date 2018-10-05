@@ -2,7 +2,7 @@ ARG ARCH=library
 
 FROM ${ARCH}/alpine
 
-ARG VERSION=2.0.16
+ARG VERSION=2.0.17
 RUN apk add --no-cache curl ca-certificates su-exec bash && \
     case $(uname -m) in \
         x86_64 ) ARCH=x86_64 ;; \
