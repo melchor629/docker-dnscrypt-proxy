@@ -10,15 +10,6 @@ if [ "${1:0:1}" = '-' ]; then
     set -- dnscrypt-proxy "$@"
 fi
 
-#If the dnscrypt-proxy is going to run, but is root, run as nobody
-if [ "$1" = 'dnscrypt-proxy' ] && [ "$(id -u)" = '0' ]; then
-    mkdir -p "$CONFIG_PATH"
-    chown -R nobody "$CONFIG_PATH"
-    chmod 700 "$CONFIG_PATH"
-
-    exec su-exec nobody "$BASH_SOURCE" "$@"
-fi
-
 if [ "$1" = 'dnscrypt-proxy' ]; then
     mkdir -p "$CONFIG_PATH"
     chown -R "$(id -u)" "$CONFIG_PATH" 2>/dev/null || :
