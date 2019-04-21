@@ -35,7 +35,7 @@ EOF
         #Change the default port as this is going to be executed without root privileges
         #Also disable IPv6 port bind as it is not enabled by default
         sed -i \
-            "s/listen_addresses = \\['127.0.0.1:53', '\\[::1\\]:53'\\]/listen_addresses = ['0.0.0.0:53']/" \
+            "s/listen_addresses = \\['127.0.0.1:53', '\\[::1\\]:53'\\]/listen_addresses = ['0.0.0.0:5353']/" \
             "$CONFIG_PATH/dnscrypt-proxy.toml"
 
         #Store the cache of public resolvers in a subfolder
