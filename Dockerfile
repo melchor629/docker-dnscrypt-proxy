@@ -37,7 +37,7 @@ COPY docker-entrypoint.sh /
 RUN chmod ua+x /docker-entrypoint.sh
 
 VOLUME /etc/dnscrypt-proxy
-EXPOSE 5353 5353/udp
+EXPOSE 53 53/udp
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["-config", "/etc/dnscrypt-proxy/dnscrypt-proxy.toml"]

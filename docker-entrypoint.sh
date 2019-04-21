@@ -10,15 +10,6 @@ if [ "${1:0:1}" = '-' ]; then
     set -- dnscrypt-proxy "$@"
 fi
 
-#If the dnscrypt-proxy is going to run, but is root, run as nobody
-if [ "$1" = 'dnscrypt-proxy' ] && [ "$(id -u)" = '0' ]; then
-    mkdir -p "$CONFIG_PATH"
-    chown -R nobody "$CONFIG_PATH"
-    chmod 700 "$CONFIG_PATH"
-
-    exec su-exec nobody "$BASH_SOURCE" "$@"
-fi
-
 if [ "$1" = 'dnscrypt-proxy' ]; then
     mkdir -p "$CONFIG_PATH"
     chown -R "$(id -u)" "$CONFIG_PATH" 2>/dev/null || :
@@ -44,7 +35,7 @@ EOF
         #Change the default port as this is going to be executed without root privileges
         #Also disable IPv6 port bind as it is not enabled by default
         sed -i \
-            "s/listen_addresses = \\['127.0.0.1:53', '\\[::1\\]:53'\\]/listen_addresses = ['0.0.0.0:5353']/" \
+            "s/listen_addresses = \\['127.0.0.1:53', '\\[::1\\]:53'\\]/listen_addresses = ['0.0.0.0:53']/" \
             "$CONFIG_PATH/dnscrypt-proxy.toml"
 
         #Store the cache of public resolvers in a subfolder
