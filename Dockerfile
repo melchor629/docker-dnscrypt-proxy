@@ -3,7 +3,7 @@ ARG ARCH=library
 FROM ${ARCH}/alpine
 
 ARG VERSION=2.0.19
-RUN apk add --no-cache curl ca-certificates su-exec bash && \
+RUN apk add --no-cache curl ca-certificates bash && \
     case $(uname -m) in \
         x86_64 ) ARCH=x86_64 ;; \
         armv7l ) ARCH=arm ;; \
@@ -37,7 +37,7 @@ COPY docker-entrypoint.sh /
 RUN chmod ua+x /docker-entrypoint.sh
 
 VOLUME /etc/dnscrypt-proxy
-EXPOSE 53 53/udp
+EXPOSE 5353 5353/udp
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["-config", "/etc/dnscrypt-proxy/dnscrypt-proxy.toml"]
