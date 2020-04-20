@@ -10,9 +10,11 @@ The configuration must be stored in `/etc/dnscrypt-proxy`. The rest of files (li
 
 In [Docker Hub](https://hub.docker.com/r/melchor9000/dnscrypt-proxy/), you can find these tags for `melchor9000/dnscrypt-proxy`:
 
- - `latest`: x86_64/amd64
+ - `latest`: all supported architectures
+ - `amd64`: x86_64/amd64
  - `arm`: armhf (armv7)
  - `arm64`: aarch64 (armv8 64-bit)
+ - VERSION: select one version of dnscrypt-proxy to use (e.g.: `2.0.42`)
 
 All images are based on [alpine](https://hub.docker.com/_/alpine/) image to have low size images.
 
@@ -37,7 +39,9 @@ This initial configuration is good enough to start doing things. But, for a prod
 
 ## Environment variables
 
-The only one environment variable that can be configured is `CONFIG_PATH`. By default is `/etc/dnscrypt-proxy`, but if you want to change that, you can. This variable is to tell the init script where is the configuration folder inside the container. It is not recommended to change that, as the default value is valid, but you can change that if you need to.
+The first one environment variable that can be configured is `CONFIG_PATH`. By default is `/etc/dnscrypt-proxy`, but if you want to change that, you can. This variable is to tell the init script where is the configuration folder inside the container. It is not recommended to change that, as the default value is valid, but you can change that if you need to.
+
+There is another environment variable which is `DNSCRYPT_PROXY_RULES` which enables for you the following rules and filters: `forwarding`, `cloaking`, `blacklist`, `ip-blacklist` and `whitelist`. Supported values are a comma-sepparated list of the rules/filters to enable. By default, will not enable anything.
 
 ## Example: docker
 

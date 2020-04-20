@@ -63,21 +63,35 @@ EOF
             "$CONFIG_PATH/dnscrypt-proxy.toml"
 
         #Enable * rules (for an easy configuration)
-        sed -i \
-            "s/# forwarding_rules = 'forwarding-rules.txt'/forwarding_rules = 'forwarding-rules.txt'/" \
-            "$CONFIG_PATH/dnscrypt-proxy.toml"
-        sed -i \
-            "s/# cloaking_rules = 'cloaking-rules.txt'/cloaking_rules = 'cloaking-rules.txt'/" \
-            "$CONFIG_PATH/dnscrypt-proxy.toml"
-        sed -i \
-            "s/# blacklist_file = 'blacklist.txt'/blacklist_file = 'blacklist.txt'/" \
-            "$CONFIG_PATH/dnscrypt-proxy.toml"
-        sed -i \
-            "s/# blacklist_file = 'ip-blacklist.txt'/blacklist_file = 'ip-blacklist.txt'/" \
-            "$CONFIG_PATH/dnscrypt-proxy.toml"
-        sed -i \
-            "s/# whitelist_file = 'whitelist.txt'/whitelist_file = 'whitelist.txt'/" \
-            "$CONFIG_PATH/dnscrypt-proxy.toml"
+        if [[ "$DNSCRYPT_PROXY_RULES" == *"forwarding"* ]]; then
+            sed -i \
+                "s/# forwarding_rules = 'forwarding-rules.txt'/forwarding_rules = 'forwarding-rules.txt'/" \
+                "$CONFIG_PATH/dnscrypt-proxy.toml"
+        fi
+
+        if [[ "$DNSCRYPT_PROXY_RULES" == *"cloaking"* ]]; then
+            sed -i \
+                "s/# cloaking_rules = 'cloaking-rules.txt'/cloaking_rules = 'cloaking-rules.txt'/" \
+                "$CONFIG_PATH/dnscrypt-proxy.toml"
+        fi
+
+        if [[ "$DNSCRYPT_PROXY_RULES" == *"blacklist"* ]]; then
+            sed -i \
+                "s/# blacklist_file = 'blacklist.txt'/blacklist_file = 'blacklist.txt'/" \
+                "$CONFIG_PATH/dnscrypt-proxy.toml"
+        fi
+
+        if [[ "$DNSCRYPT_PROXY_RULES" == *"ip-blacklist"* ]]; then
+            sed -i \
+                "s/# blacklist_file = 'ip-blacklist.txt'/blacklist_file = 'ip-blacklist.txt'/" \
+                "$CONFIG_PATH/dnscrypt-proxy.toml"
+        fi
+
+        if [[ "$DNSCRYPT_PROXY_RULES" == *"whitelist"* ]]; then
+            sed -i \
+                "s/# whitelist_file = 'whitelist.txt'/whitelist_file = 'whitelist.txt'/" \
+                "$CONFIG_PATH/dnscrypt-proxy.toml"
+        fi
     fi
 fi
 
