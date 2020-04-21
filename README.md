@@ -33,15 +33,15 @@ This initial configuration is good enough to start doing things. But, for a prod
  3. If docker has enabled IPv6 connectivity and you have IPv6 to the internet, you should set to `true` the line `ipv6_servers`
  4. Do not set a `log_file` nor `use_syslog`, let docker manage the log :)
  5. Could be a good idea to change the `fallback_resolver`, by default is `9.9.9.9:53`
- 6. The forwarding and cloacking rules are enabled by default, you should modify the files to adapt to your needs
- 7. The blacklist, ip-blacklist and whitelist are enabled too, you can add some block (or allow) rules in these files. The blacklist has some defined values, look them
- 8. Could be a good idea to check the `cache` options
+ 6. Could be a good idea to check the `cache` options
 
 ## Environment variables
 
 The first one environment variable that can be configured is `CONFIG_PATH`. By default is `/etc/dnscrypt-proxy`, but if you want to change that, you can. This variable is to tell the init script where is the configuration folder inside the container. It is not recommended to change that, as the default value is valid, but you can change that if you need to.
 
 There is another environment variable which is `DNSCRYPT_PROXY_RULES` which enables for you the following rules and filters: `forwarding`, `cloaking`, `blacklist`, `ip-blacklist` and `whitelist`. Supported values are a comma-sepparated list of the rules/filters to enable. By default, will not enable anything.
+
+NOTE: When enabling cloaking rules; the file `cloaking-rules.txt` comes with some pre-defined rules which can block access to certain websites video/search content such as Youtube, Google and Yandix. You should modify the file first to adapt to your needs before enabling `cloaking` using the environment variable `DNSCRYPT_PROXY_RULES`.
 
 ## Example: docker
 
