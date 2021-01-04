@@ -2,7 +2,7 @@ ARG ARCH=library
 
 FROM ${ARCH}/alpine
 
-ARG VERSION=2.0.19
+ARG VERSION=2.0.45
 RUN apk add --no-cache curl ca-certificates bash && \
     case $(uname -m) in \
         x86_64 ) ARCH=x86_64 ;; \
@@ -26,6 +26,7 @@ RUN apk add --no-cache curl ca-certificates bash && \
         echo "   > Copying $file -> /usr/local/share/dnscrypt-proxy$new_file_name" && \
         cp $file "/usr/local/share/dnscrypt-proxy$new_file_name"; \
     done && \
+    cp linux-$ARCH/localhost.pem /usr/local/share/dnscrypt-proxy/localhost.pem && \
     chmod 777 /etc/dnscrypt-proxy/ && \
     chmod -R a+r /usr/local/share/dnscrypt-proxy/ && \
     \

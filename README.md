@@ -39,7 +39,7 @@ This initial configuration is good enough to start doing things. But, for a prod
 
 The first one environment variable that can be configured is `CONFIG_PATH`. By default is `/etc/dnscrypt-proxy`, but if you want to change that, you can. This variable is to tell the init script where is the configuration folder inside the container. It is not recommended to change that, as the default value is valid, but you can change that if you need to.
 
-There is another environment variable which is `DNSCRYPT_PROXY_RULES` which enables for you the following rules and filters: `forwarding`, `cloaking`, `blacklist`, `ip-blacklist` and `whitelist`. Supported values are a comma-sepparated list of the rules/filters to enable. By default, will not enable anything.
+There is another environment variable which is `DNSCRYPT_PROXY_RULES` which enables for you the following rules and filters: `forwarding`, `cloaking`, `blocked-names`, `blocked-ips`, `allowed-names`, `allowed-ips`, `captive-portals` and `local-doh`. Supported values are a comma-sepparated list of the rules/filters to enable. By default, will not enable anything.
 
 NOTE: When enabling cloaking rules; the file `cloaking-rules.txt` comes with some pre-defined rules which can block access to certain websites video/search content such as Youtube, Google and Yandix. You should modify the file first to adapt to your needs before enabling `cloaking` using the environment variable `DNSCRYPT_PROXY_RULES`.
 
@@ -63,6 +63,11 @@ services:
       - target: 5353
         published: 53
         protocol: udp
+        mode: host
+      # enable this only if local DoH is going to be used
+      - target: 8443
+        published: 443
+        protocol: tcp
         mode: host
     restart: always
     volumes:
