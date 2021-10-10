@@ -6,20 +6,21 @@ on:
       version:
         description: 'dnscrypt-proxy version to build'
         required: true
-        default: '2.1.1'
+        default: ''
 
 env:
   # Use docker.io for Docker Hub if empty
   REGISTRY: docker.io
-  # github.repository as <account>/<repo>
+  # Docker image name
   IMAGE_NAME: melchor9000/dnscrypt-proxy
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
     permissions:
       contents: read
+    env:
+      DNSCRYPT_PROXY_VERSION: ${{ github.event.inputs.version || '2.1.1' }}
 
     steps:
       - name: Checkout repository
@@ -46,5 +47,5 @@ jobs:
         with:
           context: .
           platforms: linux/amd64,linux/arm64,linux/arm/v7
-          build-args: VERSION=${{ github.event.inputs.version }} 
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest,${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.event.inputs.version }}
+          build-args: VERSION=${{ env.DNSCRYPT_PROXY_VERSION }} 
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest,${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.DNSCRYPT_PROXY_VERSION }}
