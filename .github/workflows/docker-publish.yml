@@ -54,3 +54,4 @@ jobs:
           platforms: linux/amd64,linux/arm64,linux/arm/v7
           build-args: VERSION=${{ env.DNSCRYPT_PROXY_VERSION }} 
           tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest,${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.DNSCRYPT_PROXY_VERSION }}
+          push: true
