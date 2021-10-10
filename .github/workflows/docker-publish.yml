@@ -20,11 +20,15 @@ jobs:
     permissions:
       contents: read
     env:
-      DNSCRYPT_PROXY_VERSION: ${{ github.event.inputs.version || '2.1.1' }}
+      DNSCRYPT_PROXY_VERSION: ${{ github.event.inputs.version }}
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+        
+      - name: Setup default version
+        run: echo "DNSCRYPT_PROXY_VERSION=2.1.1" >> $GITHUB_ENV
+        if: ${{ DNSCRYPT_PROXY_VERSION == "" }}
         
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
